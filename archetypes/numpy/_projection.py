@@ -92,7 +92,7 @@ class Projector(ABC):
     @abstractmethod
     def project(self, x: NDArray) -> NDArray:
         """
-        Project the input array onto the feasible set.
+        Project the each row of the input array onto the feasible set.
 
         Parameters
         ----------
@@ -109,7 +109,7 @@ class Projector(ABC):
 
 class UnitSimplexProjector(Projector):
     """
-    Direct Projector onto the unit simplex (each row).
+    Direct Projector onto the unit simplex.
     """
 
     def __init__(
@@ -231,7 +231,7 @@ class L1NormalizeProjector(Projector):
     @classmethod
     def from_shape(cls, shape: tuple[int]):
         """
-        Create a `l1NormalizeProjector` from the shape of the array to project.
+        Create a `L1NormalizeProjector` from the shape of the array to project.
 
         Parameters
         ----------
@@ -240,7 +240,7 @@ class L1NormalizeProjector(Projector):
 
         Returns
         -------
-        projector : l1NormalizeProjector
+        projector : L1NormalizeProjector
             Projector onto the unit simplex.
         """
         sum = np.empty((shape[0], 1), dtype=float)
@@ -250,7 +250,7 @@ class L1NormalizeProjector(Projector):
     @classmethod
     def from_array(cls, x: NDArray, inplace: bool = False):
         """
-        Create a `l1NormalizeProjector` from an array to project.
+        Create a `L1NormalizeProjector` from an array to project.
 
         Parameters
         ----------
@@ -261,7 +261,7 @@ class L1NormalizeProjector(Projector):
 
         Returns
         -------
-        projector : l1NormalizeProjector
+        projector : L1NormalizeProjector
             Projector onto the unit simplex.
         """
         x = np.asarray(x, dtype=float)
