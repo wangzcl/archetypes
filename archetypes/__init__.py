@@ -3,7 +3,6 @@ from importlib.metadata import version
 from archetypes.numpy import (
     AA,
     ADA,
-    NAA,
     BiAA,
     FairAA,
     FairKernelAA,
@@ -23,3 +22,11 @@ __all__ = [
 ]
 
 __version__ = version("archetypes")
+
+
+def __getattr__(name):
+    if name == "NAA":
+        from archetypes.numpy import NAA
+
+        return NAA
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")

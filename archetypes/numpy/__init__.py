@@ -4,7 +4,6 @@ from ._biaa import BiAA
 from ._fair_aa import FairAA
 from ._fair_kernel_aa import FairKernelAA
 from ._kernel_aa import KernelAA
-from ._naa import NAA
 from ._sym_biaa import SymmetricBiAA
 
 __all__ = [
@@ -17,3 +16,11 @@ __all__ = [
     "KernelAA",
     "FairKernelAA",
 ]
+
+
+def __getattr__(name):
+    if name == "NAA":
+        from ._naa import NAA
+
+        return NAA
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
